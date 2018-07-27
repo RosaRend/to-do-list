@@ -1,0 +1,22 @@
+
+<h3>To-Do List</h3>
+
+<div *ngFor="let log of theStickies">
+  
+  <p>{{log.title}} - {{log.description}}</p>
+  <p>Complete: {{log.doneyet}}</p>
+
+</div>
+
+<!-- <form (submit)= "submit(newEntry)">
+  <label>Label</label>
+  <input type="text" name="theTitle" [(ngModel)]="newEntry.title">
+
+  <label>Description</label>
+  <textarea type="text" name="theDescription" [(ngModel)]="newEntry.description"></textarea>
+
+  <label>Complete</label>
+
+  <button>Add Task</button>
+
+</form> -->
