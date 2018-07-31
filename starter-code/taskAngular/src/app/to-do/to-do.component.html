@@ -1,14 +1,46 @@
 
+<div *ngIf="theUser.username">
+  User: {{theUser.username | json}}
+</div>
+
+<div *ngIf="theError">
+  {{theError}}
+
+</div>
+
+<h2>SignUp</h2>
+<form (submit)="tryToSignUp()">
+  <label>Username</label>
+  <input type="text" name="theUsername" [(ngModel)]="userSignUp.username">
+
+  <label>Password</label>
+  <input type="text" name="thePassword" [(ngModel)]="userSignUp.password">
+  
+  <button>Register Account</button>
+</form>
+
+<h2>Login</h2>
+<form (submit)="tryToLogin()">
+  <label>Username</label>
+  <input type="text" name="theUsername" [(ngModel)]="userLogin.username">
+
+  <label>Password</label>
+  <input type="text" name="thePassword" [(ngModel)]="userLogin.password">
+
+  <button>Access Site</button>
+</form>
+
 <h3>To-Do List</h3>
 
 <div *ngFor="let log of theStickies">
   
   <p>{{log.title}} - {{log.description}}</p>
   <p>Complete: {{log.doneyet}}</p>
+  <button (click)="delete()">Remove Task</button>
 
 </div>
 
-<!-- <form (submit)= "submit(newEntry)">
+<form (submit)= "submit(newEntry)">
   <label>Label</label>
   <input type="text" name="theTitle" [(ngModel)]="newEntry.title">
 
@@ -19,4 +51,5 @@
 
   <button>Add Task</button>
 
-</form> -->
+</form>
+

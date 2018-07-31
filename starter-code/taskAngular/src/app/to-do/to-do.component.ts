@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NotesService } from '../services/notes.service'
 
 @Component({
@@ -8,18 +9,60 @@ import { NotesService } from '../services/notes.service'
 })
 export class ToDoComponent implements OnInit {
   theStickies: any;
-  newEntry: any;
-  
+  newEntry: any = {};
+  userSignUp:any = {};
+  userLogin:any = {};
+  theUser:any = {};
+  theError:any;
+
   constructor(private theService: NotesService) { }
+  
+  successfulAccess(userObj){
+    this.theUser = userObj;
+    this.theError = null;
+  }
+
+  errorUponAccess(errorObj){
+    this.theError = errorObj;
+    this.theUser = {};
+  }
+
+  tryToSignUp(){
+    this.theService.signup(this.userSignUp)
+    .subscribe(res => {this.successfulAccess(res)},
+    err => {this.errorUponAccess(err)}
+    )
+  }
+
+  tryToLogin(){
+
+    this.theService.login(this.userLogin)
+    .subscribe(res => {this.successfulAccess(res)}, 
+    err => {this.errorUponAccess(err)}
+    )
+  }
+
+  logoutUser(){
+    this.theService.logout()
+    .subscribe(res => {this.theUser = {}})
+  }
 
   ngOnInit() {
     this.display()
+    this.checkForUser()
   }
 
   display(){
     this.theService.getStickies().subscribe((everyNote)=>{
       this.theStickies = everyNote.reverse();
     })
+  }
+
+  checkForUser(){
+    this.theService.isLoggedIn()
+    .subscribe(res => {this.successfulAccess(res)}, 
+    (err => {this.errorUponAccess(err)})
+    )
   }
 
   submit(newEntry){
@@ -29,4 +72,8 @@ export class ToDoComponent implements OnInit {
     })
   }
 
+  delete(){
+    this.theService.removeASticky()
+    .subscribe((res) => {this.theStickies = {}})
+  }
 }

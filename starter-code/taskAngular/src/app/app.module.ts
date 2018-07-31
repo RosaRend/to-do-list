@@ -11,7 +11,7 @@ import { DetailToDoComponent } from './detail-to-do/detail-to-do.component';
 import { TaskRouteComponent } from './task-route/task-route.component'
 
 const routes: Routes = [
-  // { path: '', component: }
+  { path: '', component: DetailToDoComponent }
 ]
 
 @NgModule({

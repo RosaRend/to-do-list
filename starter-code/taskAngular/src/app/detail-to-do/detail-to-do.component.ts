@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../services/notes.service'
+// import { TaskRouteComponent } from '../task-route/task-route.component'
 
 @Component({
   selector: 'app-detail-to-do',
@@ -11,6 +12,7 @@ export class DetailToDoComponent implements OnInit {
   constructor(private theService: NotesService) { }
 
   ngOnInit() {
+    // this.
   }
 
 }
